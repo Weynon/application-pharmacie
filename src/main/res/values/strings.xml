@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ApplicationPharmacie</string>
+    <string name="app_homescreen_name">Application pharmacie</string>
+    <string name="app_newinfos_name">Nouveau médicament : infos</string>
+    <string name="app_stock_name">Médicaments en stock</string>
+    <string name="app_newutil_name">Nouveau médicament : utilisation</string>
+    <string name="app_newsummary_name">Nouveau médicament : résumé</string>
+    <string name="back_button">Retour</string>
 </resources>
