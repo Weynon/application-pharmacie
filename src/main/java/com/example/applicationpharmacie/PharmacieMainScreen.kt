@@ -21,7 +21,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,6 +35,7 @@ import com.example.applicationpharmacie.pages.MedicationViewModel
 import com.example.applicationpharmacie.pages.SummaryScreen
 import com.example.applicationpharmacie.pages.UtilisationScreen
 import com.example.applicationpharmacie.pages.ViewStockScreen
+import com.example.applicationpharmacie.pages.update
 
 
 enum class PharmacieAppScreenName(@StringRes val screenName: Int) {
@@ -122,7 +125,7 @@ fun PharmacieApp(
                     onCancelButtonClicked = {
                         abortNewMedication(vm, navController)
                     },
-                    onValueChange = { vm.setName(it.text)},
+                    onValueChange = { updateViewModel(vm,it) },
                     modifier = Modifier
                         .fillMaxSize()
                 )
@@ -152,6 +155,12 @@ fun PharmacieApp(
         }
     }
 }
+
+fun updateViewModel(vm: MedicationViewModel, value: Pair<String,String>) {
+    if (value.first == "name") vm.setName(value.second)
+    else vm.setDescription(value.second)
+}
+
 
 private fun abortNewMedication(viewModel: MedicationViewModel, navController: NavHostController) {
     viewModel.reset()

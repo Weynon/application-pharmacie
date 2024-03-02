@@ -27,7 +27,7 @@ fun HomeScreen(
         ){
             Text("Afficher liste médicaments")
         }
-        Spacer(modifier = Modifier.height(5.dp))
+        // Spacer(modifier = Modifier.height(5.dp))
         Button(
             onClick = { onAddButtonClicked() },
             modifier = Modifier.fillMaxWidth()

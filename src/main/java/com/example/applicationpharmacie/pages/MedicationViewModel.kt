@@ -32,4 +32,8 @@ class MedicationViewModel : ViewModel() {
     fun reset() {
         _uiState.value = MedicationUiState()
     }
+
+    override fun toString(): String {
+        return uiState.value.toString()
+    }
 }

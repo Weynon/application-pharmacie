@@ -24,11 +24,11 @@ import com.example.applicationpharmacie.R
 fun AddMedicationScreen(
     onNextButtonClicked: () -> Unit,
     onCancelButtonClicked: () -> Unit,
-    onValueChange: (TextFieldValue) -> Unit,
+    onValueChange: (Pair<String,String>) -> Unit,
     modifier: Modifier = Modifier
 ){
-    val name by remember { mutableStateOf(TextFieldValue("")) }
-    val description by remember { mutableStateOf(TextFieldValue("")) }
+    var name by remember { mutableStateOf(TextFieldValue()) }
+    var description by remember { mutableStateOf(TextFieldValue()) }
 
     Column(
         modifier = Modifier,
@@ -38,19 +38,29 @@ fun AddMedicationScreen(
             modifier = Modifier
                 .fillMaxWidth(),
             verticalAlignment = Alignment.Bottom
-        ){
+        ) {
             OutlinedTextField(
                 value = name,
-                onValueChange = onValueChange,
-                label = { Text(stringResource(R.string.textfield_label_name))},
-                placeholder = { Text(stringResource(R.string.textfield_placeholder_name))}
+                onValueChange = {
+                    name = it
+                    onValueChange(Pair("name", name.text))
+                },
+                label = { Text(stringResource(R.string.textfield_label_name)) },
+                placeholder = { Text(stringResource(R.string.textfield_placeholder_name)) }
             )
+        }
+        Row() {
             OutlinedTextField(
                 value = description,
-                onValueChange = onValueChange,
-                label = { Text(stringResource(R.string.textfield_label_description))},
-                placeholder = { Text(stringResource(R.string.textfield_placeholder_description))}
+                onValueChange = {
+                    description = it
+                    onValueChange(Pair("description", description.text))
+                },
+                label = { Text(stringResource(R.string.textfield_label_description)) },
+                placeholder = { Text(stringResource(R.string.textfield_placeholder_description)) }
             )
+        }
+        Row(){
             OutlinedButton(
                 onClick = onCancelButtonClicked,
                 modifier = Modifier.weight(1f)
@@ -66,3 +76,8 @@ fun AddMedicationScreen(
         }
     }
 }
+
+fun update(name: TextFieldValue, it: TextFieldValue) {
+    println(it)
+}
+
