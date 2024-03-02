@@ -2,9 +2,10 @@
 
 package com.example.applicationpharmacie
 
-import android.annotation.SuppressLint
+import androidx.lifecycle.ViewModel
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -63,10 +65,9 @@ fun PharmacieAppBar(
     )
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun PharmacieApp(
-    //viewModel: MedicationViewModel = viewModel(),
+    vm: MedicationViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ){
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -83,7 +84,8 @@ fun PharmacieApp(
             )
         }
     ) {
-        // innerPadding -> val uiState by viewModel.uiState.collectAsState()
+        innerPadding ->
+        val uiState by vm.uiState.collectAsState()
 
         NavHost(
             navController = navController,
@@ -91,6 +93,7 @@ fun PharmacieApp(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
+                .padding(innerPadding)
         ){
             composable(route = PharmacieAppScreenName.Start.name){
                 HomeScreen(
@@ -108,25 +111,44 @@ fun PharmacieApp(
             }
             composable(route = PharmacieAppScreenName.NewInfo.name){
                 AddMedicationScreen(
-
+                    onNextButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.NewUtil.name)
+                    },
+                    onCancelButtonClicked = {
+                        abortNewMedication(vm, navController)
+                    },
+                    onValueChange = { vm.setName(it.text)},
                     modifier = Modifier
                         .fillMaxSize()
                 )
             }
             composable(route = PharmacieAppScreenName.NewUtil.name){
                 UtilisationScreen(
-
+                    onNextButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.NewSummary.name)
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                 )
             }
             composable(route = PharmacieAppScreenName.NewSummary.name){
                 SummaryScreen(
-
+                    medicationUiState = uiState,
+                    onCancelButtonClicked = {
+                        abortNewMedication(vm, navController)
+                    },
+                    onValidateButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.Start.name)
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                 )
             }
         }
     }
+}
+
+private fun abortNewMedication(viewModel: MedicationViewModel, navController: NavHostController) {
+    viewModel.reset()
+    navController.popBackStack(PharmacieAppScreenName.Start.name, inclusive = false)
 }

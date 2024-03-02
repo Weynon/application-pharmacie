@@ -4,4 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun UtilisationScreen(modifier: Modifier = Modifier){}
+fun UtilisationScreen(
+    onNextButtonClicked: (Int) -> Unit,
+    modifier: Modifier = Modifier
+){}

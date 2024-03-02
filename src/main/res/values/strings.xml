@@ -6,4 +6,10 @@
     <string name="app_newutil_name">Nouveau médicament : utilisation</string>
     <string name="app_newsummary_name">Nouveau médicament : résumé</string>
     <string name="back_button">Retour</string>
+    <string name="button_cancel">Retour</string>
+    <string name="button_next">Suivant</string>
+    <string name="textfield_label_name">Nom du médicament</string>
+    <string name="textfield_placeholder_name">Entrez le nom</string>
+    <string name="textfield_placeholder_description">Entrez une description</string>
+    <string name="textfield_label_description">Description du médicament</string>
 </resources>

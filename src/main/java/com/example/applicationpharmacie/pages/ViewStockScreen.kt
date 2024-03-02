@@ -4,4 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ViewStockScreen(modifier: Modifier = Modifier){}
+fun ViewStockScreen(
+
+    modifier: Modifier = Modifier
+){}
