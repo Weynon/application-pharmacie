@@ -97,7 +97,12 @@ fun PharmacieApp(
         ){
             composable(route = PharmacieAppScreenName.Start.name){
                 HomeScreen(
-
+                    onListButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.Stock.name)
+                    },
+                    onAddButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.NewInfo.name)
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                 )
