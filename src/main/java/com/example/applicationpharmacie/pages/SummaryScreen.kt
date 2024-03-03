@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -42,7 +43,8 @@ fun SummaryScreen(
     println(medication.toString())
 
     Column(
-        modifier = modifier,
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.SpaceBetween
     ){
         Column(
             modifier = Modifier.padding(20.dp),
@@ -57,6 +59,7 @@ fun SummaryScreen(
         Row(
             modifier = Modifier
                 .padding(15.dp),
+            horizontalArrangement = Arrangement.End
         ) {
             OutlinedButton(
                 onClick = onCancelButtonClicked,

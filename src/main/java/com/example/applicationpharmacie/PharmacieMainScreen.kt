@@ -95,8 +95,7 @@ fun PharmacieApp(
             startDestination = PharmacieAppScreenName.Start.name,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(innerPadding)
+                .padding(innerPadding),
         ){
             composable(route = PharmacieAppScreenName.Start.name){
                 HomeScreen(
@@ -107,14 +106,15 @@ fun PharmacieApp(
                         navController.navigate(PharmacieAppScreenName.NewInfo.name)
                     },
                     modifier = Modifier
-                        .fillMaxSize()
                 )
             }
             composable(route = PharmacieAppScreenName.Stock.name){
                 ViewStockScreen(
-
-                    modifier = Modifier
-                        .fillMaxSize()
+                    onReturnButtonClicked = {
+                        navController.navigate(PharmacieAppScreenName.Start.name)
+                    },
+                    medicationList = DataSource.loadMedications(),
+                    modifier = Modifier.fillMaxSize()
                 )
             }
             composable(route = PharmacieAppScreenName.NewInfo.name){
