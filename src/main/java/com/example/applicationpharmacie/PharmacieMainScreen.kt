@@ -2,7 +2,6 @@
 
 package com.example.applicationpharmacie
 
-import androidx.lifecycle.ViewModel
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -21,9 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -35,7 +32,8 @@ import com.example.applicationpharmacie.pages.MedicationViewModel
 import com.example.applicationpharmacie.pages.SummaryScreen
 import com.example.applicationpharmacie.pages.UtilisationScreen
 import com.example.applicationpharmacie.pages.ViewStockScreen
-import com.example.applicationpharmacie.pages.update
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 enum class PharmacieAppScreenName(@StringRes val screenName: Int) {
@@ -135,6 +133,7 @@ fun PharmacieApp(
                     onNextButtonClicked = {
                         navController.navigate(PharmacieAppScreenName.NewSummary.name)
                     },
+
                     modifier = Modifier
                         .fillMaxSize()
                 )
@@ -158,7 +157,18 @@ fun PharmacieApp(
 
 fun updateViewModel(vm: MedicationViewModel, value: Pair<String,String>) {
     if (value.first == "name") vm.setName(value.second)
-    else vm.setDescription(value.second)
+    else if (value.first == "description") vm.setDescription(value.second)
+    else vm.setExpirationDate(generateDate(value.second))
+}
+
+fun generateDate(dateAsString: String): LocalDate {
+    var date = LocalDate.parse("2011-11-11")
+    val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+    if (dateAsString.length == 10) {
+        date = LocalDate.parse(dateAsString,formatter)
+        println(date)
+    }
+    return date
 }
 
 

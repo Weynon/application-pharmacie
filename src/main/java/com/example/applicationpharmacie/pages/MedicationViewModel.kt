@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import java.util.Date
+import java.time.LocalDate
 
 class MedicationViewModel : ViewModel() {
 
@@ -25,7 +25,7 @@ class MedicationViewModel : ViewModel() {
         _uiState.update { currentState -> currentState.copy(type=type) }
     }
 
-    fun setExpirationDate(expirationDate: Date){
+    fun setExpirationDate(expirationDate: LocalDate){
         _uiState.update { currentState -> currentState.copy(expirationDate=expirationDate) }
     }
 
