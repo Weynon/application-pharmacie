@@ -28,9 +28,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.applicationpharmacie.data.DataSource
+import com.example.applicationpharmacie.data.MedicationViewModel
 import com.example.applicationpharmacie.pages.AddMedicationScreen
 import com.example.applicationpharmacie.pages.HomeScreen
-import com.example.applicationpharmacie.pages.MedicationViewModel
 import com.example.applicationpharmacie.pages.SummaryScreen
 import com.example.applicationpharmacie.pages.UtilisationScreen
 import com.example.applicationpharmacie.pages.ViewStockScreen
@@ -165,7 +165,7 @@ fun PharmacieApp(
 fun updateViewModel(vm: MedicationViewModel, value: Pair<String,String>) {
     if (value.first == "name") vm.setName(value.second)
     else if (value.first == "description") vm.setDescription(value.second)
-    else vm.setExpirationDate(generateDate(value.second))
+    else vm.setExpirationDate(value.second)
 }
 
 fun generateDate(dateAsString: String): LocalDate {

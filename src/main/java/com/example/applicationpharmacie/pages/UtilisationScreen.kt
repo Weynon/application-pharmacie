@@ -58,29 +58,29 @@ fun UtilisationScreen(
                 }
             }
         }
-    }
-    Row(
-        verticalAlignment = Alignment.Bottom,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 2.dp, vertical = 15.dp)
-    ){
-        OutlinedButton(
-            onClick = onCancelButtonClicked,
+        Row(
+            verticalAlignment = Alignment.Bottom,
             modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 5.dp)
-        ) {
-            Text(stringResource(R.string.button_cancel))
-        }
-        Button(
-            onClick = onNextButtonClicked,
-            modifier = Modifier
-                .padding(horizontal = 5.dp)
-                .weight(1f),
-            enabled = isTypeSelected(selectedValue)
-        ) {
-            Text(stringResource(R.string.button_next))
+                .fillMaxWidth()
+                .padding(horizontal = 2.dp, vertical = 15.dp)
+        ){
+            OutlinedButton(
+                onClick = onCancelButtonClicked,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp)
+            ) {
+                Text(stringResource(R.string.button_cancel))
+            }
+            Button(
+                onClick = onNextButtonClicked,
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .weight(1f),
+                enabled = isTypeSelected(selectedValue)
+            ) {
+                Text(stringResource(R.string.button_next))
+            }
         }
     }
 }

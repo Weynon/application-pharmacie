@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.applicationpharmacie.R
 import com.example.applicationpharmacie.data.MedicationUiState
+import com.example.applicationpharmacie.data.toMedication
 import java.time.format.DateTimeFormatter
 
 @Composable
@@ -30,15 +32,17 @@ fun SummaryScreen(
     modifier: Modifier = Modifier
 ){
     val infos = listOf(
-        Pair("Nom du médicament", medicationUiState.name),
-        Pair("Description du médicament", medicationUiState.description),
-        Pair("Type de médicament", medicationUiState.type),
-        Pair("Date de péremption", medicationUiState.expirationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+        Pair("Nom du médicament", medicationUiState.medicationDetails.name),
+        Pair("Description du médicament", medicationUiState.medicationDetails.description),
+        Pair("Type de médicament", medicationUiState.medicationDetails.type),
+        Pair("Date de péremption", medicationUiState.medicationDetails.expirationDate)
     )
+
+    val medication = medicationUiState.medicationDetails.toMedication()
+    println(medication.toString())
 
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.SpaceBetween
     ){
         Column(
             modifier = Modifier.padding(20.dp),
@@ -50,28 +54,26 @@ fun SummaryScreen(
                 Divider(thickness = 1.dp)
             }
         }
-    }
-    Row(
-        verticalAlignment = Alignment.Bottom,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 2.dp, vertical = 15.dp)
-    ){
-        OutlinedButton(
-            onClick = onCancelButtonClicked,
+        Row(
             modifier = Modifier
-                .weight(1f)
-                .padding(horizontal = 5.dp)
+                .padding(15.dp),
         ) {
-            Text(stringResource(R.string.button_cancel))
-        }
-        Button(
-            onClick = onValidateButtonClicked,
-            modifier = Modifier
-                .padding(horizontal = 5.dp)
-                .weight(1f),
-        ) {
-            Text(stringResource(R.string.button_validate))
+            OutlinedButton(
+                onClick = onCancelButtonClicked,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 5.dp)
+            ) {
+                Text(stringResource(R.string.button_cancel))
+            }
+            Button(
+                onClick = onValidateButtonClicked,
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .weight(1f),
+            ) {
+                Text(stringResource(R.string.button_validate))
+            }
         }
     }
 }
