@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -25,7 +24,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import com.example.applicationpharmacie.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddMedicationScreen(
     onNextButtonClicked: () -> Unit,
@@ -42,7 +40,7 @@ fun AddMedicationScreen(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Row() {
+        Row{
             OutlinedTextField(
                 value = name,
                 onValueChange = {
@@ -55,7 +53,7 @@ fun AddMedicationScreen(
                 )
             )
         }
-        Row() {
+        Row{
             OutlinedTextField(
                 value = description,
                 onValueChange = {
@@ -69,7 +67,7 @@ fun AddMedicationScreen(
                 )
             )
         }
-        Row(){
+        Row{
             OutlinedTextField(
                 value = date,
                 onValueChange = {
