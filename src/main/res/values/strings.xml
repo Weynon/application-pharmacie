@@ -12,4 +12,10 @@
     <string name="textfield_placeholder_name">Entrez le nom</string>
     <string name="textfield_placeholder_description">Entrez une description</string>
     <string name="textfield_label_description">Description du médicament</string>
+    <string name="medtype_name_insectes">Insectes</string>
+    <string name="medtype_name_vitamines">Vitamines</string>
+    <string name="medtype_name_pommades">Pommades</string>
+    <string name="medtype_name_homeopathie">Homéopathie</string>
+    <string name="medtype_name_urgences">Urgences</string>
+    <string name="medtype_name_medicaments">Médicaments</string>
 </resources>

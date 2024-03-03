@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -26,6 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.applicationpharmacie.data.DataSource
 import com.example.applicationpharmacie.pages.AddMedicationScreen
 import com.example.applicationpharmacie.pages.HomeScreen
 import com.example.applicationpharmacie.pages.MedicationViewModel
@@ -129,11 +131,16 @@ fun PharmacieApp(
                 )
             }
             composable(route = PharmacieAppScreenName.NewUtil.name){
+                val context = LocalContext.current
                 UtilisationScreen(
                     onNextButtonClicked = {
                         navController.navigate(PharmacieAppScreenName.NewSummary.name)
                     },
-
+                    onCancelButtonClicked = {
+                        abortNewMedication(vm, navController)
+                    },
+                    onSelectionChanged = { vm.setType(it) },
+                    types = DataSource.medicationTypes.map { id -> context.resources.getString(id) },
                     modifier = Modifier
                         .fillMaxSize()
                 )
@@ -165,8 +172,7 @@ fun generateDate(dateAsString: String): LocalDate {
     var date = LocalDate.parse("2011-11-11")
     val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
     if (dateAsString.length == 10) {
-        date = LocalDate.parse(dateAsString,formatter)
-        println(date)
+        date = LocalDate.parse(dateAsString, formatter)
     }
     return date
 }

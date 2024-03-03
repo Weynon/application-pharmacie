@@ -110,11 +110,11 @@ fun AddMedicationScreen(
     }
 }
 
-fun isObjectReady(name: TextFieldValue, description: TextFieldValue, date: TextFieldValue): Boolean {
+private fun isObjectReady(name: TextFieldValue, description: TextFieldValue, date: TextFieldValue): Boolean {
     return name.text != "" && description.text != "" && isDateWellFormatted(date)
 }
 
-fun isDateWellFormatted(date: TextFieldValue): Boolean {
+private fun isDateWellFormatted(date: TextFieldValue): Boolean {
     val pattern = "\\d{2}/\\d{2}/\\d{4}"
     return Regex(pattern).matches(date.text)
 }
