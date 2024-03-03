@@ -18,4 +18,5 @@
     <string name="medtype_name_homeopathie">Homéopathie</string>
     <string name="medtype_name_urgences">Urgences</string>
     <string name="medtype_name_medicaments">Médicaments</string>
+    <string name="button_validate">Valider</string>
 </resources>
